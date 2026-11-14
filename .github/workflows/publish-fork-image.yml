@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      # The Dockerfile copies the whole checkout into the image: keep the git folder out of it.
+      - run: rm -rf .git
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
